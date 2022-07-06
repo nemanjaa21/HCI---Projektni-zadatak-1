@@ -1,0 +1,93 @@
+﻿<Window x:Class="PZ1.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PZ1"
+        mc:Ignorable="d"
+        Title="AddWindow" MouseLeftButtonDown="Window_MouseLeftButtonDown" SizeToContent="WidthAndHeight"  Height="450" Width="800" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Canvas Height="500" Width="800">
+        <Canvas.Resources>
+            <DropShadowEffect x:Key="dropMouseOverShadowBlue" Color="Blue" Direction="45" Opacity="80"/>
+            <DropShadowEffect x:Key="dropMouseOverShadowRed" Color="Red" Direction="45" Opacity="80"/>
+        </Canvas.Resources>
+        <Path Stroke="DarkOrange" StrokeThickness="11" x:Name="UIPath" Stretch="Fill" Width="780.4" Height="477.2" RenderTransformOrigin="0.66,0.553" Canvas.Top="10" Canvas.Left="10">
+            <Path.Fill>
+                <ImageBrush ImageSource="slika4.jpg"/>
+            </Path.Fill>
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="50,0">
+                        <ArcSegment Size="20,150" RotationAngle="180" IsLargeArc="True" SweepDirection="Counterclockwise" Point="50,350"/>
+                        <LineSegment Point="375,350"/>
+                        <ArcSegment Size="20,150" RotationAngle="180" IsLargeArc="True" SweepDirection="Counterclockwise" Point="375,0"/>
+                        <LineSegment Point="50,0"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        <Label x:Name="labelIme" Content="IME I PREZIME: " FontFamily="Lucida Handwriting" Background="LightSkyBlue" HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="Black" Canvas.Left="44" Canvas.Top="103"/>
+        <TextBox x:Name="textBoxIme" Opacity="0.75"   LostFocus="textBoxIme_LostFocus" GotFocus="textBoxIme_GotFocus" Height="24" Canvas.Left="166" TextWrapping="Wrap" Text="Unesite ime i prezime..." Foreground="Gray" Canvas.Top="106" Width="281"/>
+        <Label  x:Name="labelTekst"  Content="TEKST: " FontFamily="Lucida Handwriting" Background="LightSkyBlue" HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="Black" Canvas.Left="44" Canvas.Top="193" Width="88"/>
+        <RichTextBox  x:Name="richTextBox1" Opacity="0.75"  Height="120" Canvas.Left="161" Canvas.Top="215" Width="361" RenderTransformOrigin="0.59,1.465" SelectionChanged="richTextBox1_SelectionChanged" TextChanged="richTextBox1_TextChanged"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <DockPanel Height="30" Width="254" Canvas.Left="178"  Canvas.Top="180">
+            <ToolBar DockPanel.Dock="Top" Margin="-20,0,-92.6,0" >
+                <ToggleButton Command="EditingCommands.ToggleBold" Name="buttonBold" Content=" B "/>
+                <Separator/>
+                <ToggleButton Command="EditingCommands.ToggleItalic" Name="buttonItalic" Content=" I "/>
+                <Separator/>
+                <ToggleButton Command="EditingCommands.ToggleUnderline" Name="buttonUnderline" Content=" U "/>
+                <Separator/>
+                <Button x:Name="buttonColor" Content="Color" Click="buttonColor_Click"/>
+                <Separator/>
+                <Label x:Name="ColorLabel" Content="" Canvas.Left="529" Canvas.Top="291" Height="24" Width="22"/>
+                <Separator/>
+                <ComboBox x:Name="cmbFontSize" Width="30" SelectionChanged="cmbFontSize_SelectionChanged"/>
+                <Separator/>
+                <ComboBox x:Name="cmbFontFamily" Width="76" SelectionChanged="cmbFontFamily_SelectionChanged" Height="21" Margin="0"/>
+                <Separator/>
+                <Label Content="Words:" Width="46" />
+                <TextBox x:Name="textBoxWordsCount" Width="30" Text="" IsReadOnly="True"/>
+            </ToolBar>
+        </DockPanel>
+
+        <Label x:Name="labelSlika" Content="SLIKA: " FontFamily="Lucida Handwriting" Background="LightSkyBlue" HorizontalAlignment="Left"  VerticalAlignment="Top"  Foreground="Black" Canvas.Left="544" Canvas.Top="187" Width="96" />
+        <Label x:Name="labelDatum" Content="DATUM: " FontFamily="Lucida Handwriting" Background="LightSkyBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Canvas.Left="544" Canvas.Top="119" Width="96"/>
+        <DatePicker x:Name="datePicker" FontFamily="Lucida Handwriting" Height="28" Width="121" VerticalAlignment="Top" HorizontalAlignment="Left" Canvas.Left="645" Canvas.Top="120"/>
+        <Button x:Name="Browse" Content="BROWSE..." FontFamily="Lucida Handwriting" Opacity="0.90" Canvas.Left="645" Canvas.Top="188" Width="113" Foreground="Gray" Height="26" Click="Button_Browse" ToolTip="Odaberite sliku koju želite" RenderTransformOrigin="0.974,4.966"/>
+        <Button x:Name="ButtonAddWindowDODAJ" Content="DODAJ" ToolTip="Dodavanje u tabelu" FontFamily="Lucida Handwriting" Canvas.Left="79" Canvas.Top="418" Width="268" Height="37" Click="ButtonAddWindowDODAJ_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect" Value="{StaticResource dropMouseOverShadowBlue}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="ButtonAddWindowIZADJI" Content="IZADJI" ToolTip="Izlaz iz ovog prozora" FontFamily="Lucida Handwriting" Click="ButtonAddWindowIZADJI_Click" Canvas.Left="438" Canvas.Top="419" Width="268" Height="37">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect" Value="{StaticResource dropMouseOverShadowRed}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Image x:Name="imageAddWindow" Stretch="Fill" Height="121" Width="145" Canvas.Left="583" Canvas.Top="269"/>
+        <Label x:Name="labelImeGreska" Foreground="Red" Canvas.Left="161" Canvas.Top="135" Width="281" Height="29"/>
+        <Label x:Name="labelRichGreska" Foreground="Red" Canvas.Left="31" Canvas.Top="236" Width="115" Height="29"/>
+        <Label x:Name="labelBrojGodina"  Content="BROJ GODINA:" FontFamily="Lucida Handwriting" Background="LightSkyBlue" HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="Black" Canvas.Left="44" Canvas.Top="342"/>
+        <TextBox x:Name="textBoxBrGodina" Opacity="0.75"  Height="25" Canvas.Left="161" GotFocus="textBoxBrGodina_GotFocus" LostFocus="textBoxBrGodina_LostFocus" TextWrapping="Wrap" Text="Unesite godine..." Foreground="Gray" Canvas.Top="345" Width="155" />
+        <Label x:Name="labelGodineGreska" Foreground="Red" BorderThickness="5"  Canvas.Left="79" Canvas.Top="375" Width="156"/>
+        <Label x:Name="labelNazivDodavanjeIgraca" Content="DODAVANJE IGRAČA" Opacity="0.85" Background="OrangeRed" Foreground="Black"  Canvas.Left="178" Canvas.Top="34" Width="419" Height="53" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Lucida Handwriting" FontSize="35"/>
+        <Label x:Name="labelDatumGreska" Foreground="Red" Canvas.Left="563" Canvas.Top="151" Height="32" Width="151"/>
+        <Label x:Name="labelSlikaGreska" Foreground="Red" Canvas.Left="583" Canvas.Top="236" Width="113" Height="28"/>
+
+
+    </Canvas>
+</Window>
+

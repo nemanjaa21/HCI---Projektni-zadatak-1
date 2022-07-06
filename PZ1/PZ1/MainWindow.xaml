@@ -1,0 +1,156 @@
+﻿<Window x:Class="PZ1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PZ1"
+        mc:Ignorable="d"
+        Title="MainWindow" MouseLeftButtonDown="Window_MouseLeftButtonDown" SizeToContent="WidthAndHeight" Height="450" Width="700" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Canvas Height="500" Width="800">
+        <Canvas.Resources>
+            <DropShadowEffect x:Key="dropMouseOverShadowBlue" Color="Blue" Direction="45" Opacity="80"/>
+            <DropShadowEffect x:Key="dropMouseOverShadowRed" Color="Red" Direction="45" Opacity="80"/>
+            <DropShadowEffect x:Key="dropMouseOverShadowGreen" Color="SpringGreen" Direction="45" Opacity="80"/>
+        </Canvas.Resources>
+        <Path Stroke="DarkOrange" StrokeThickness="11" x:Name="UIPath" Canvas.Left="9.8" Stretch="Fill" Width="780.4" Height="490" RenderTransformOrigin="0.66,0.553">
+            <Path.Fill>
+                <ImageBrush ImageSource="slika3.jpg"/>
+            </Path.Fill>
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="50,0">
+                        <ArcSegment Size="20,150" RotationAngle="180" IsLargeArc="True" SweepDirection="Counterclockwise" Point="50,350"/>
+                        <LineSegment Point="375,350"/>
+                        <ArcSegment Size="20,150" RotationAngle="180" IsLargeArc="True" SweepDirection="Counterclockwise" Point="375,0"/>
+                        <LineSegment Point="50,0"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        <Button Content="DODAJ IGRAČA" FontFamily="Lucida Handwriting" ToolTip="Dodavanje igrača" Canvas.Left="84" Canvas.Top="431" Width="268" Click="Button_Click_1" Height="37">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect" Value="{StaticResource dropMouseOverShadowBlue}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="ExitButton" Content="IZLAZ" FontFamily="Lucida Handwriting" Canvas.Left="450" Canvas.Top="431" Width="268" Click="Button_Click" ToolTip="Izlaz iz programa" Height="37">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect" Value="{StaticResource dropMouseOverShadowRed}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <DataGrid x:Name="dataGridLegende" FontFamily="Lucida Handwriting"  Opacity="0.75" ItemsSource="{Binding Legende}" SelectionMode="Single" IsReadOnly="True" CanUserResizeColumns="False" CanUserResizeRows="False"  Height="298" Canvas.Left="43"  Canvas.Top="114" Width="716" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+
+                <DataGridTemplateColumn Header="Slika"  Width="85" CanUserSort="False" CanUserReorder="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Slika}" Height="70" Width="70" HorizontalAlignment="Center" Stretch="Fill"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header = "Ime i prezime" Binding = "{Binding ImeIPrezime}" CanUserSort="False" CanUserReorder="False" Width="140">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Broj godina" Binding="{Binding BrojGodina}" Width="95" CanUserSort="False" CanUserReorder="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum}" Width="150" CanUserSort="False" CanUserReorder="False">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width="*" CanUserSort="False" CanUserReorder="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button Name="buttonProcitaj" Content="Procitaj" FontFamily="Lucida Handwriting" Width="80" Height="28" Click="buttonProcitaj_Click" Background="White" Foreground="Black">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Effect" Value="{StaticResource dropMouseOverShadowGreen}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                        <Button Name="buttonIzmeni" Content="Izmeni" FontFamily="Lucida Handwriting" Width="80" Height="28" Click="buttonIzmeni_Click" Background="White" Foreground="Black">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Effect" Value="{StaticResource dropMouseOverShadowGreen}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Button Name="buttonObrisi" Content="Obrisi" FontFamily="Lucida Handwriting" Width="80" Height="28" Click="buttonObrisi_Click" Background="White" Foreground="Black">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Effect" Value="{StaticResource dropMouseOverShadowRed}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="labelNaslov" FontFamily="Lucida Handwriting" Content="LEGENDE NBA LIGE" Foreground="Black" Opacity="0.85" Background="OrangeRed"  Canvas.Left="170" Canvas.Top="30" Width="461" Height="66" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontSize="35"/>
+
+    </Canvas>
+</Window>
